@@ -6,6 +6,13 @@ from django.db import models
 
 class Tag(models.Model):
     name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
+
+class Category(models.Model):
+    text = models.CharField(max_length=100)
+
+
 
 class Post(models.Model):
     image = models.ImageField(null=True, blank=True)
@@ -15,8 +22,12 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     tags = models.ManyToManyField(Tag, related_name='posts')
+    category = models.ForeignKey(Category, related_name='posts', on_delete=models.CASCADE, null=True)
 
-class Category(models.Model):
-    text = models.CharField(max_length=100)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='categories')
+
+    def __str__(self):
+        return self.title
+
+
+
 
