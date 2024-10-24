@@ -29,7 +29,7 @@ urlpatterns = ([
     path('admin/', admin.site.urls),
     path('site/', answer_view),
     path('template/', second_view),
-    path('post/', list_view),
+    path('posts/', list_view),
     path('posts/<int:post_id>/', detail_view),
     path('posts/create/', post_create_view),
     path('register/', register_view),
