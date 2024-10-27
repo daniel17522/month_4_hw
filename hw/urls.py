@@ -20,8 +20,9 @@ from posts.views import (answer_view,
                          second_view,
                          list_view,
                          detail_view,
-                         post_create_view)
-from user.views import register_view, login_view, logout_view
+                         post_create_view,
+                         post_update_view)
+from user.views import register_view, login_view, logout_view, profile_view
 from django.contrib.staticfiles.urls import static
 from django.conf import settings
 
@@ -35,5 +36,7 @@ urlpatterns = ([
     path('register/', register_view),
     path('login/', login_view),
     path('logout/', logout_view),
+    path('profile/', profile_view),
+    path('posts/<int:post_id>/update/', post_update_view)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) +
                static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS))

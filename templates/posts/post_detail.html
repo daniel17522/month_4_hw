@@ -13,6 +13,9 @@
       <p class="card-text">{{post.rate}}</p>
       <p class="card-text">{{post.created_at}}</p>
       <p class="card-text">{{post.updated_at}}</p>
+    {% if post.author == request.user %}
+    <a href="update/" class="btn btn-primary">Edit</a>
+    {%endif%}
   </div>
 </div>
 

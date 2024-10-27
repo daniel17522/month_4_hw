@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from posts.models import Post
 from django.db.models import Q
@@ -56,3 +56,15 @@ def post_create_view(request):
             return render(request, 'posts/post_create.html', {'form': form})
         form.save()
         return HttpResponse(f'Created post')
+
+def post_update_view(request, post_id):
+    post = Post.objects.get(id=post_id)
+    if request.method == 'GET':
+        form = PostForm2(instance=post)
+        return render(request, 'posts/post_update.html', context={'form': form})
+    if request.method == 'POST':
+        form = PostForm2(request.POST, request.FILES, instance=post)
+        if not form.is_valid():
+            return render(request, 'posts/post_update.html', {'form': form})
+        form.save()
+        return redirect('/profile/')
